@@ -14,11 +14,13 @@ class MyForm(QDialog):
 		self.ui.setupUi(self)
 		self.ui.generate.clicked.connect(self.generate)
 		self.ui.easter.clicked.connect(self.easterClicked)
+		self.ui.password.textChanged.connect(self.checkStrongPassword)
 
 		self.smallChars = [l for l in string.ascii_lowercase]
 		self.capitalChars = [l for l in string.ascii_uppercase]
 		self.numbers = [str(i) for i in range(0, 10)]
 		self.specialChars = [l for l in string.punctuation]
+
 
 
 	def generate(self):
@@ -73,6 +75,12 @@ class MyForm(QDialog):
 						new_password += password[i]
 				password = new_password
 
+	def checkStrongPassword(self):
+		suma =0
+		password = self.ui.password.text()
+		for i in range(len(password)):
+			suma = suma + i
+			self.ui.passwordPower.setValue(suma)
 
 
 	def check_password(self, password):
