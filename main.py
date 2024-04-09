@@ -8,7 +8,6 @@ from layout import Ui_Dialog
 
 
 class MyForm(QDialog):
-
 	def __init__(self):
 		super().__init__()
 		self.ui = Ui_Dialog()
@@ -21,8 +20,9 @@ class MyForm(QDialog):
 		self.numbers = [str(i) for i in range(0, 10)]
 		self.specialChars = [l for l in string.punctuation]
 
+
 	def generate(self):
-		while True:
+
 			length = int(self.ui.passwordLength.text())
 			password_type = self.ui.passwordType.currentText()
 			password = ''
@@ -31,26 +31,35 @@ class MyForm(QDialog):
 			if password_type == 'Pin':
 				for i in range(length):
 					password += str(random.randint(0, 9))
+			elif self.ui.word.isChecked():
+				words = self.readDict('odm.txt')
+				while len(password) < int(length):
+					password += random.choice(words)
 			else:
-				elements = []
-				elements.append(self.smallChars)
-				if self.ui.capitalChars.isChecked():
-					counter += 1
-					elements.append(self.capitalChars)
-				if self.ui.numbers.isChecked():
-					counter += 1
-					elements.append(self.numbers)
-				if self.ui.specialChar.isChecked():
-					counter += 1
-					elements.append(self.specialChars)
+				while True:
+					elements = []
+					elements.append(self.smallChars)
+					if self.ui.capitalChars.isChecked():
+						counter += 1
+						elements.append(self.capitalChars)
+					if self.ui.numbers.isChecked():
+						counter += 1
+						elements.append(self.numbers)
+					if self.ui.specialChar.isChecked():
+						counter += 1
+						elements.append(self.specialChars)
 
-				if int(length) < counter:
-					print("Za mało")
-					return
+					if int(length) <= counter:
+						print("Za mało")
+						return
 
-				for i in range(length):
-					element_type = random.choice(elements)
-					password += random.choice(element_type)
+					for i in range(length):
+						element_type = random.choice(elements)
+						password += random.choice(element_type)
+
+					if self.check_password(password):
+						self.ui.genertedPassword.setText(password)
+						break
 
 			if self.ui.easter.isChecked() and len(password) >= 5:
 				max_index = len(password) - 6
@@ -64,11 +73,11 @@ class MyForm(QDialog):
 						new_password += password[i]
 				password = new_password
 
-			if self.check_password(password):
-				self.ui.genertedPassword.setText(password)
-				break
+
 
 	def check_password(self, password):
+		if not any(char.islower() for char in password):
+			return False
 		if self.ui.capitalChars.isChecked() and not any(char.isupper() for char in password):
 			return False
 		if self.ui.numbers.isChecked() and not any(char.isdigit() for char in password):
@@ -93,6 +102,16 @@ class MyForm(QDialog):
 			self.ui.specialChar.setDisabled(False)
 			self.ui.word.setDisabled(False)
 
+	def readDict(self, path):
+		words = []
+		with open(path, 'r', encoding='utf-8') as file:
+			lines = file.readline()
+			for line in file:
+				line = lines.split(',')[0]
+				line = line.replace('\n','')
+				if(len(line) > 2 and line.find(' ') == -1):
+					words.append(line)
+			return words
 
 if __name__ == "__main__":
 	app = QApplication(sys.argv)
