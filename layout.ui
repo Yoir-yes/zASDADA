@@ -33,8 +33,11 @@
     </property>
     <item row="2" column="2">
      <layout class="QFormLayout" name="formLayout_2">
+      <property name="horizontalSpacing">
+       <number>20</number>
+      </property>
       <property name="verticalSpacing">
-       <number>15</number>
+       <number>20</number>
       </property>
       <property name="leftMargin">
        <number>20</number>
@@ -55,7 +58,7 @@
        </widget>
       </item>
       <item row="0" column="1">
-       <widget class="QLineEdit" name="passowrd">
+       <widget class="QLineEdit" name="password">
         <property name="echoMode">
          <enum>QLineEdit::Password</enum>
         </property>
@@ -69,7 +72,7 @@
        </widget>
       </item>
       <item row="1" column="1">
-       <widget class="QProgressBar" name="progressBar">
+       <widget class="QProgressBar" name="passwordPower">
         <property name="value">
          <number>0</number>
         </property>
@@ -137,8 +140,11 @@
     </item>
     <item row="2" column="0">
      <layout class="QFormLayout" name="formLayout">
+      <property name="horizontalSpacing">
+       <number>20</number>
+      </property>
       <property name="verticalSpacing">
-       <number>15</number>
+       <number>20</number>
       </property>
       <property name="leftMargin">
        <number>20</number>
@@ -159,7 +165,7 @@
        </widget>
       </item>
       <item row="0" column="1">
-       <widget class="QComboBox" name="passowrdType">
+       <widget class="QComboBox" name="passwordType">
         <item>
          <property name="text">
           <string>Hasło</string>
@@ -185,7 +191,7 @@
        </widget>
       </item>
       <item row="1" column="1">
-       <widget class="QSpinBox" name="passowrdLenght"/>
+       <widget class="QSpinBox" name="passwordLength"/>
       </item>
       <item row="2" column="0">
        <widget class="QLabel" name="label_6">
@@ -201,6 +207,9 @@
       </item>
       <item row="2" column="1">
        <layout class="QVBoxLayout" name="verticalLayout">
+        <property name="spacing">
+         <number>10</number>
+        </property>
         <item>
          <widget class="QCheckBox" name="specialChar">
           <property name="text">
@@ -209,14 +218,14 @@
          </widget>
         </item>
         <item>
-         <widget class="QCheckBox" name="number">
+         <widget class="QCheckBox" name="numbers">
           <property name="text">
            <string>Cyfry</string>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QCheckBox" name="capitalChards">
+         <widget class="QCheckBox" name="capitalChars">
           <property name="text">
            <string>Duże litery</string>
           </property>
@@ -248,22 +257,28 @@
      </layout>
     </item>
     <item row="3" column="2">
-     <widget class="QLabel" name="Image">
+     <widget class="QLabel" name="image">
       <property name="text">
        <string/>
       </property>
      </widget>
     </item>
     <item row="3" column="0">
-     <widget class="QLabel" name="generatedpassword">
+     <widget class="QLabel" name="genertedPassword">
       <property name="text">
        <string/>
       </property>
       <property name="scaledContents">
-       <bool>false</bool>
+       <bool>true</bool>
       </property>
       <property name="alignment">
        <set>Qt::AlignCenter</set>
+      </property>
+      <property name="wordWrap">
+       <bool>false</bool>
+      </property>
+      <property name="margin">
+       <number>0</number>
       </property>
      </widget>
     </item>
